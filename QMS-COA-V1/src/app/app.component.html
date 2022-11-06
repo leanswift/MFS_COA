@@ -1,0 +1,185 @@
+<soho-icons-new></soho-icons-new>
+<soho-icons-empty-new></soho-icons-empty-new>
+
+<a href="#maincontent" class="skip-link" data-translate="text">SkipToMain</a>
+<soho-icons *ngIf="!useUpliftIcons"></soho-icons>
+<soho-icons-uplift *ngIf="useUpliftIcons"></soho-icons-uplift>
+<soho-icons-empty *ngIf="!useUpliftIcons"></soho-icons-empty>
+<soho-icons-empty-uplift *ngIf="useUpliftIcons"></soho-icons-empty-uplift>
+<div class="page-container no-scroll">
+   <!-- <app-header [title]="headerTitle"></app-header> -->
+   <soho-header>
+      <soho-toolbar-flex>
+         <button soho-toolbar-flex-nav-button>Show Navigation</button>
+         <soho-toolbar-flex-section [isTitle]="true">
+            <h2>
+               <span soho-toolbar-flex-page-title>Print COA Report</span>
+            </h2>
+         </soho-toolbar-flex-section>
+         <soho-toolbar-flex-more-button [isPageChanger]="true">
+            <app-personalize-menu></app-personalize-menu>
+         </soho-toolbar-flex-more-button>
+      </soho-toolbar-flex>
+   </soho-header>
+
+
+
+   <div id="maincontent" class="page-container scrollable" role="main">
+      <div soho-busyindicator [activated]="isBusy" [blockUI]="true" [displayDelay]="0" >
+         <div class="row form-responsive top-padding">
+            <div class="twelve columns">
+         
+               <div #itemModalDatagrid soho-datagrid [gridOptions]="itemModalGridOptions"
+                  soho-busyindicator [activated]="isItemModalBusy" [blockUI]="true"
+                  [displayDelay]="0" (selected)="onSelectedInvItem($event)">
+               </div>
+         
+            </div>
+         </div> 
+      
+         
+      
+         <div class="container">
+            <!-- <div class="form-responsive row">
+               <div class="six columns">
+                  <div class="field">
+                     <h1>User context</h1>
+                     <p>Click the Load button to show all M3 user context values current values that will differ if running
+                        within
+                        H5 and for example the company has been changed.</p>
+                  </div>
+                  <button soho-button="primary" (click)="onClickLoad()">Load</button>
+               </div>
+            </div> -->
+            <div class=" form-responsive row top-padding">
+               <div class="six columns">
+                  <div class="field">
+                     <label for="di-cono">Items Description</label>
+                     <input id="di-cono" [(ngModel)]="company"  readonly/>
+                  </div>
+               </div>
+               <div class="six columns">
+                  <div class="field">
+                     <label for="di-ccono">Browse Item</label>
+                     <!-- <input id="di-ccono" [(ngModel)]="currentCompany" readonly /> -->
+                     <select soho-dropdown soho-busyindicator id="ItDes" name="whlo"
+                                          placeholder="Select item" [(ngModel)]="exceldataWarehouse" aria-required="true"
+                                          data-validate="required" (change)="onSelectedChainItem($event)">
+                                          <option value="-1">&nbsp;</option>
+                                          <option *ngFor="let whData of excellistWareHouseData" [value]="whData.ITDS">
+                                             {{whData.ITNO}} - {{whData.ITDS}}
+                     </select>
+                  </div>
+               </div>
+            </div>
+      
+            <div class="form-responsive row">
+               <div class="six columns">
+                  <div class="field">
+                     <label for="di-not1">CO Lot Number</label>
+                     <input id="di-not1" [(ngModel)]="colotnumber"  />
+                  </div>
+               </div>
+               <div class="six columns">
+                  <div class="field">
+                     <label for="di-editem">Edit Item</label>
+                     <input id="di-editem" [(ngModel)]="ItdsEditablevalue"  />
+                  </div>
+               </div>
+      
+               
+            </div>
+      
+            <div class="form-responsive row">
+               <div class="six columns">
+                  <div class="field">
+                     <label for="di-not2">Note 1</label>
+                     <input id="di-not2" [(ngModel)]="notes1"  />
+                  </div>
+               </div>
+               <div class="six columns">
+                  <div class="field">
+                     <label for="di-not3">Note 2</label>
+                     <input id="di-not3" [(ngModel)]="notes2"  />
+                  </div>
+               </div>
+               
+            </div>
+      
+            <div class="form-responsive row">
+               <div class="six columns">
+                  <div class="field">
+                     <label for="di-clang">Note 3</label>
+                     <input id="di-clang" [(ngModel)]="notes3"  />
+                  </div>
+               </div>
+               <div class="six columns">
+                  <div class="field">
+                     <label for="di-lang">Note 4</label>
+                     <input id="di-lang" [(ngModel)]="notes4"  />
+                  </div>
+               </div>
+            </div>
+
+            <div class="form-responsive row">
+               <div class="six columns">
+                  <div class="field">
+                     <label for="di-clang">Note 5</label>
+                     <input id="di-clang" [(ngModel)]="notes5"  />
+                  </div>
+               </div>
+               <div class="six columns">
+                   
+               </div>
+            </div>
+
+            <div class="form-responsive row">
+               <div class="six columns">
+                  <div class="field-short">
+                     <button class="btn-primary btn_width_full btn-normal" type="button" style="min-width: 300px;float: left;min-height: 50px;"
+                      id="clear_cus" (click)="clearExcelAll()">Clear all</button>
+                  </div>
+                  
+               </div>
+               <div class="six columns">
+                  <div class="field-short">
+                     <button class="btn-primary btn_width_full btn-normal" type="button" style="min-width: 300px;float: right;min-height: 50px;"
+                     id="Update_cus" (click)="updatecoa()">Print COA</button>
+                  </div>
+               </div>
+            </div>
+
+            
+         </div>
+         <!-- <div class="row form-responsive top-padding">
+            <div class="twelve columns">
+               <div>COA Preview </div>
+               <div><br /></div> -->
+               <!-- <img src="https://www.w3schools.com/images/lamp.jpg" alt="Lamp" width="32" height="32"> -->
+               <!-- <img src="assets/Sample.png" style="width: 1134px;height: 700px;"> -->
+      
+         
+            <!-- </div>
+         </div>  -->
+         <!-- <div class="form-responsive row">
+            <div class="six columns">
+               <div class="field-short">
+                  <button class="btn-primary btn_width_full btn-normal" type="button" id="clear_cus">Print COA</button>
+               </div>
+               
+            </div>
+            <!-- <div class="six columns">
+               <div class="field-short">
+                  <button class="btn-primary btn_width_full btn-normal" type="button" id="Update_cus">Create Order</button>
+               </div>
+            </div> -->
+            
+         <!-- </div> --> -->
+      </div>
+      
+   </div>
+</div>
+<div soho-personalize (changetheme)="onChangeTheme($event)"></div>
+
+
+

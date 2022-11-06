@@ -1,0 +1,22 @@
+<li>
+   <a href="#">{{'Versions' | sohoTranslate}}</a>
+   <ul class="popupmenu">
+      <li class="is-selectable is-checked"><a href="#" data-theme-name="theme-new" data-translate="text">New</a></li>
+      <li class="is-selectable"><a href="#" data-theme-name="theme-classic" data-translate="text">Classic</a></li>
+   </ul>
+</li>
+<li>
+   <a href="#">{{'Modes' | sohoTranslate}}</a>
+   <ul class="popupmenu">
+      <li class="is-selectable is-checked"><a href="#" data-theme-mode="light" data-translate="text">Light</a></li>
+      <li class="is-selectable"><a href="#" data-theme-mode="dark" data-translate="text">Dark</a></li>
+      <li class="is-selectable"><a href="#" data-theme-mode="contrast" data-translate="text">Contrast</a></li>
+   </ul>
+</li>
+<li>
+   <a href="#">{{'Colors' | sohoTranslate}}</a>
+   <ul class="popupmenu">
+      <li class="personalization-colors"></li>
+   </ul>
+</li>
+<div soho-personalize (changetheme)="onChangeTheme($event)" (changecolors)="onChangeColors($event)"></div>
